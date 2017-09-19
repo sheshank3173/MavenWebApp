@@ -13,7 +13,144 @@
 </head>
 <body>
 	<jsp:include page="Navbar.jsp"></jsp:include>
-	<form:form id="regForm" modelAttribute="user" action="registerProcess"
+
+	<div class="container" style="margin-top: 5%;">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h2>Registration</h2>
+				</div>
+				<div class="panel-body">
+
+					<!-- Registration Form -->
+					<form role="form" id="regForm" modelAttribute="user"
+						action="registerProcess" method="post">
+
+						<!-- Username Field -->
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label for="username"><span class="text-danger"
+									style="margin-right: 5px;">*</span>Username:</label>
+								<div class="input-group">
+									<input class="form-control" id="username" type="text"
+										name="username" placeholder="Username" required /> <span
+										class="input-group-btn"> <label class="btn btn-primary"><span
+											class="glyphicon glyphicon-user" aria-hidden="true"></span></label>
+									</span>
+
+								</div>
+							</div>
+						</div>
+						<!-- Content Field -->
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label for="password"><span class="text-danger"
+									style="margin-right: 5px;">*</span>Password:</label>
+								<div class="input-group">
+									<input class="form-control" id="password" type="password"
+										name="password" placeholder="Password" required /> <span
+										class="input-group-btn"> <label class="btn btn-primary"><span
+											class="glyphicon glyphicon-user" aria-hidden="true"></span></label>
+									</span>
+
+								</div>
+							</div>
+						</div>
+
+						<!-- Firstname Field -->
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label for="firstname"><span class="text-danger"
+									style="margin-right: 5px;">*</span>Firstname:</label>
+								<div class="input-group">
+									<input class="form-control" id="firstname" type="text"
+										name="firstname" placeholder="firstname" required /> <span
+										class="input-group-btn"> <label class="btn btn-primary"><span
+											class="glyphicon glyphicon-user" aria-hidden="true"></span></label>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- lastname Field -->
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label for="lastname"><span class="text-danger"
+									style="margin-right: 5px;">*</span>Lastname:</label>
+								<div class="input-group">
+									<input class="form-control" id="lastname" type="text"
+										name="lastname" placeholder="lastname" required /> <span
+										class="input-group-btn"> <label class="btn btn-primary"><span
+											class="glyphicon glyphicon-user" aria-hidden="true"></span></label>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- email Field -->
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label for="email"><span class="text-danger"
+									style="margin-right: 5px;">*</span>Email:</label>
+								<div class="input-group">
+									<input class="form-control" id="email" type="text" name="email"
+										placeholder="email" required /> <span class="input-group-btn">
+										<label class="btn btn-primary"><span
+											class="glyphicon glyphicon-user" aria-hidden="true"></span></label>
+									</span>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- address Field -->
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label for="address"><span class="text-danger"
+									style="margin-right: 5px;">*</span>Address:</label>
+								<div class="input-group">
+									<input class="form-control" id="address" type="text"
+										name="address" placeholder="address" required /> <span
+										class="input-group-btn"> <label class="btn btn-primary"><span
+											class="glyphicon glyphicon-user" aria-hidden="true"></span></label>
+									</span>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- phone Field -->
+						<div class="row">
+							<div class="form-group col-xs-12">
+								<label for="phone"><span class="text-danger"
+									style="margin-right: 5px;">*</span>Phone:</label>
+								<div class="input-group">
+									<input class="form-control" id="phone" type="text" name="phone"
+										placeholder="phone" required /> <span class="input-group-btn">
+										<label class="btn btn-primary"><span
+											class="glyphicon glyphicon-user" aria-hidden="true"></span></label>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Register Button -->
+						<div class="row">
+							<div class="form-group col-xs-4">
+								<button class="btn btn-primary" type="submit">Register</button>
+							</div>
+						</div>
+
+					</form>
+					<!-- End of register Form -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<%-- <form:form id="regForm" modelAttribute="user" action="registerProcess"
 		method="post">
 		<table align="center">
 			<tr>
@@ -57,6 +194,6 @@
 			<tr></tr>
 
 		</table>
-	</form:form>
+	</form:form> --%>
 </body>
 </html>

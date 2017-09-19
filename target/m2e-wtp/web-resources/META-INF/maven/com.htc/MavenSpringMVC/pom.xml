@@ -13,17 +13,12 @@
 		<spring.version>4.3.2.RELEASE</spring.version>
 		<junit.version>4.12</junit.version>
 		<servlet.version>3.1.0</servlet.version>
-		
+
 		<mysql.connector.version>5.1.9</mysql.connector.version>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
+
 
 		<!-- Junit -->
 		<dependency>
@@ -91,6 +86,13 @@
 			<version>${mysql.connector.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
 
 	</dependencies>
 	<build>
@@ -99,13 +101,17 @@
 		<plugins>
 
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<fork>true</fork>
-					<executable>C:\Program Files\Java\jdk1.8.0_25\bin\javac.exe</executable>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
+			<!-- <plugin> <artifactId>maven-compiler-plugin</artifactId> <version>3.1</version> 
+				<configuration> <fork>true</fork> <executable>C:\Program Files\Java\jdk1.8.0_25\bin\javac.exe</executable> 
+				</configuration> </plugin> -->
 		</plugins>
 	</build>
 </project>

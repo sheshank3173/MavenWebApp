@@ -20,7 +20,7 @@
 		<div id="navbar"
 			class="collapse navbar-collapse navbar-responsive-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="home">Home</a></li>
+				<li><a href="carousel">Home</a></li>
 				<li><a href="#">About</a></li>
 				<li><a href="#">Contact</a></li>
 				<!-- <li class="dropdown">
@@ -53,5 +53,4 @@
 <br />
 <br />
 <br />
-<br />
-<br />
+
