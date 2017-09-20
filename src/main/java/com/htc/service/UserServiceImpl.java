@@ -1,5 +1,6 @@
 package com.htc.service;
 
+import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.htc.dao.UserDAO;
@@ -18,5 +19,11 @@ public class UserServiceImpl implements UserService {
   public User validateUser(Login login) {
     return userDAO.validateUser(login);
   }
+  
+  /* Method to list valid users -- for  Selenium testing*/
+	public HashMap<String, String> existingUsers() {
+				
+		return userDAO.existingUsers();
+	}
 
 }

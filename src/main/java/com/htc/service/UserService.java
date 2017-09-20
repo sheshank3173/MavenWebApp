@@ -1,11 +1,17 @@
 package com.htc.service;
 
+import java.util.HashMap;
+
 import com.htc.model.Login;
 import com.htc.model.User;
 
+/*
+ * basic comment
+ */
 public interface UserService {
 
-  void register(User user);
+  public void register(User user);
 
-  User validateUser(Login login);
+  public User validateUser(Login login);
+  public HashMap<String, String> existingUsers();
 }

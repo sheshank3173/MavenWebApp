@@ -2,11 +2,15 @@ package com.htc.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+
 import com.htc.model.Login;
 import com.htc.model.User;
 
@@ -28,6 +32,19 @@ public class UserDAOImpl implements UserDAO {
 		List<User> users = jdbcTemplate.query(sql, new UserMapper());
 		return users.size() > 0 ? users.get(0) : null;
 	}
+
+	/* Method to list valid users -- for  Selenium testing*/
+	public HashMap<String, String> existingUsers() {
+		HashMap<String, String> users = new HashMap<String, String>();
+		String sql = "select * from users";
+		List<User> usersList=jdbcTemplate.query(sql,new UserMapper());
+		for (User user : usersList) {
+			users.put(user.getUsername(), user.getPassword());
+		}
+		
+		return users;
+	}
+
 }
 
 class UserMapper implements RowMapper<User> {
