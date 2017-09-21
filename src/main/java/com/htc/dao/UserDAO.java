@@ -8,4 +8,5 @@ public interface UserDAO {
   public void register(User user);
   public User validateUser(Login login);
   public HashMap<String, String> existingUsers();
+  public void removeTestRegister(User testUser);
 }

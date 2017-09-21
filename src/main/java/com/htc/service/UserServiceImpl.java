@@ -26,4 +26,7 @@ public class UserServiceImpl implements UserService {
 		return userDAO.existingUsers();
 	}
 
+	public void removeTestRegister(User testUser){
+		userDAO.removeTestRegister(testUser);
+	}
 }

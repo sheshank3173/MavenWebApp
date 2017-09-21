@@ -14,4 +14,5 @@ public interface UserService {
 
   public User validateUser(Login login);
   public HashMap<String, String> existingUsers();
+  public void removeTestRegister(User testUser);
 }
