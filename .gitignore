@@ -1,1 +1,10 @@
 /target/
+
+/bin/
+bin
+target
+.classpath
+.project
+.settings
+
+*.exe
