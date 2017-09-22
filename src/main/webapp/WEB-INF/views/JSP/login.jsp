@@ -63,7 +63,7 @@
 						<!-- Login Button -->
 						<div class="row">
 							<div class="form-group col-xs-4">
-								<button class="btn btn-primary" type="submit">Submit</button>
+								<button class="btn btn-primary" type="submit" id="loginbtn" name="loginbtn">Submit</button>
 							</div>
 						</div>
 

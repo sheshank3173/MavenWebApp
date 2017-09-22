@@ -36,7 +36,7 @@
 			<div id="navbar"
 				class="collapse navbar-collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
+					<li class="active"><a href="#" id="home" name="home">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Contact</a></li>
 					<!-- <li class="dropdown">
@@ -53,8 +53,8 @@
                 </li> -->
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="login">Login</a></li>
-					<li><a href="register">Register</a></li>
+					<li><a href="login" id="login" name="login">Login</a></li>
+					<li><a href="register" id="register" name="register">Register</a></li>
 				</ul>
 				<!-- <form class="navbar-form navbar-right" role="search" method="get" id="searchform" action="">
 				<div class="form-group">

@@ -137,7 +137,7 @@
 						<!-- Register Button -->
 						<div class="row">
 							<div class="form-group col-xs-4">
-								<button class="btn btn-primary" type="submit">Register</button>
+								<button class="btn btn-primary" type="submit" id="registerbtn" name="registerbtn">Register</button>
 							</div>
 						</div>
 
