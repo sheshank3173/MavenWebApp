@@ -12,8 +12,8 @@
 			</button>
 			<a class="navbar-brand" rel="home" href="#"
 				title="HTC Global Services"> <img
-				style="max-width: 45px; max-hieght: 20px; margin-top: -10px;"
-				src="styles/images/HTC_Logo.png">
+					style="max-width: 45px; max-hieght: 20px; margin-top: -10px;"
+					src="styles/images/HTC_Logo.png">
 			</a>
 		</div>
 

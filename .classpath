@@ -23,7 +23,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="D:/apache-tomcat-8.0.28-windows-x86/apache-tomcat-8.0.28/lib/servlet-api.jar">
+	<classpathentry kind="lib" path="D:/IMPC0989_D/apache-tomcat-8.5.15/lib/servlet-api.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
