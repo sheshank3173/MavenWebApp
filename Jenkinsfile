@@ -38,14 +38,16 @@ pipeline {
     
     stage('Automation Testing') {
        // Initiate Automation Testing
-      
+      steps{ 
         bat 'java org.testng.TestNG D:\\IMPC0989_D\\Srping_Workspace\\MavenTest\\bin\\testingspring.xml'
-
+	}
 
    }
    stage('Deploy') {
-       // Deploy the application 
+       // Deploy the application
+       steps{  
       bat 'copy C:\\Users\\gopim\\.jenkins\\workspace\\MavenSpringMVC\\target\\MavenSpringMVC.war D:\\eccat8.5\\webapps\\*'
+   }
    }
     
   }
