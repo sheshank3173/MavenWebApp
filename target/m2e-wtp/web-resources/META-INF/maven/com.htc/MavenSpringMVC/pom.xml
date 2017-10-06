@@ -73,6 +73,12 @@
 
 
 
+		<!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
+<dependency>
+    <groupId>org.liquibase</groupId>
+    <artifactId>liquibase-core</artifactId>
+    <version>3.5.3</version>
+</dependency>
 		
 
 		<!-- MySQL database driver -->
@@ -111,6 +117,23 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+	<version>3.0.5</version>
+	<configuration>
+	    <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
+	</configuration>
+	<executions>
+	    <execution>
+	    
+	        <goals>
+		    <goal>update</goal>
+		</goals>
+	    </execution>
+	</executions>
+    </plugin>
 			<!-- <plugin> <artifactId>maven-compiler-plugin</artifactId> <version>3.1</version> 
 				<configuration> <fork>true</fork> <executable>C:\Program Files\Java\jdk1.8.0_25\bin\javac.exe</executable> 
 				</configuration> </plugin> -->
