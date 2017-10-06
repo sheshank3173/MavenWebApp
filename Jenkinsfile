@@ -21,13 +21,13 @@ pipeline {
     stage("Build") {
       steps {
       
-        bat '${M2_HOME}\\bin\\mvn clean install -DskipTests'
+        bat '${env.M2_HOME}\\bin\\mvn clean install -DskipTests'
       }
     }
     stage("Unit Testing") {
       steps {
       
-        bat '${M2_HOME}\\bin\\mvn test'
+        bat '${env.M2_HOME}\\bin\\mvn test'
       }
     }
     stage("Unit Testing Result"){
