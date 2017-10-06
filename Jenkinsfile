@@ -4,6 +4,7 @@ pipeline {
     GIT_COMMITTER_NAME = "Gopi Muruganantham"
     GIT_COMMITTER_EMAIL = "gopi.muruganantham@htcindia.com"
     classpath="D:\\IMPC0989_D\\Srping_Workspace\\MavenTest\\bin;D:\\IMPC0989_D\\.jar files\\selenium\\lib\\*"
+    M2_HOME="D:\\apache-maven-3.3.9"
   }
   stages {
     stage("Preparing Code") {
