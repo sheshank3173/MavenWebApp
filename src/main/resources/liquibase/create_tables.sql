@@ -1,9 +1,8 @@
 --liquibase formatted sql
 --changeset Gopi Muruganantham:release_1.create_tables.sql
 
-DROP TABLE IF EXISTS users;
 
-CREATE TABLE users
+CREATE TABLE IF NOT EXISTS users
 (
   username character varying(45) NOT NULL,
   password character varying(45) DEFAULT NULL::character varying,
