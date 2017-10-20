@@ -1,16 +1,37 @@
+/*
+ * FileName: MavenJenkinsFile
+ * Author  : Gopi Muruganantham
+ * Date    : 10-10-2017
+ * Version : 1.0
+ * Copyright 2017-2018 HTC Global Services, Inc.
+*/
+
+/*
+ * Hint:
+ * 1) Please note the below script will work only if you create a parameterized job with the following param names
+ * BuildProject    => project name from GitHub repository 
+ * BuildBranch     => GitHub repository branch for BuildProject
+ * SeleniumProject => project name from GitHub repository
+ * TestBranch      => GitHub repository branch for SeleniumProject
+ * 2) Required Jar files are placed inside [{JENKINS_HOME}\Jars\] directory
+ * 3) CredentialsId for GitHub is user defined when configuring GitHub credentials 
+*/
+
+
+
 node {
    def mvnHome
    def workspace="${JENKINS_HOME}\\workspace"
    def classpath="${JENKINS_HOME}\\workspace\\${SeleniumProject}\\bin;${JENKINS_HOME}\\Jars\\selenium\\*"
-   def productionServer='D:\\eccat8.5'
-   def TestServer='D:\\IMPC0989_D\\apache-tomcat-8.5.15'
+   def testServer='D:\\apache-tomcat-8.5.14'
+   
    
    stage('Preparation') { 
       // Get some code from a GitHub repository
       echo 'Preparing Code...'
 	  emailext from: "gopi.muruganantham@htcindia.com", 
 		 to: "gopi.muruganantham@htcindia.com",
-		 cc: "syooj.panakkal@htcindia.com",
+		 cc: "sayooj.panakkal@htcindia.com",
 		 recipientProviders: [[$class: "DevelopersRecipientProvider"]], 
 		 subject: "Build Initiated ${currentBuild.fullDisplayName}", 
 		body: "Automated Build started... ${currentBuild.fullDisplayName}"
@@ -22,6 +43,7 @@ node {
 	  catch(Exception e){
 		mail(from: "gopi.muruganantham@htcindia.com", 
            to: "gopi.muruganantham@htcindia.com", 
+           cc: "sayooj.panakkal@htcindia.com",
            subject: "FAILURE: ${currentBuild.fullDisplayName}", 
            body: "Code Preparation failed :-${currentBuild.fullDisplayName}")
 		throw e
@@ -32,45 +54,7 @@ node {
       mvnHome = tool 'Maven'
       
    }
-   stage("Liquibase"){
-	echo 'Initiated Liquibase Scanning...'
-		try{
-		if (isUnix()) {
-          sh "'${mvnHome}/bin/mvn' clean liquibase:update"
-        } else {
-          bat (/${mvnHome}\\bin\\mvn liquibase:update/)
-		  }
-		}
-		catch(Exception e){
-		mail(from: "gopi.muruganantham@htcindia.com", 
-           to: "gopi.muruganantham@htcindia.com", 
-           subject: "FAILURE: ${currentBuild.fullDisplayName}", 
-           body: "Liquibase failed :-${currentBuild.fullDisplayName}")
-		throw e
-		}
-		echo 'Completed SonarCube Scanning'
-   }
-   stage("SonarCube"){
-      
-	    echo 'Initiated SonarCube Scanning...'
-		try{
-		if (isUnix()) {
-          sh "'${mvnHome}/bin/mvn' clean verify sonar:sonar"
-        } else {
-          bat (/${mvnHome}\\bin\\mvn clean verify sonar:sonar/)
-		  }
-		}
-		catch(Exception e){
-		mail(from: "gopi.muruganantham@htcindia.com", 
-           to: "gopi.muruganantham@htcindia.com", 
-           subject: "FAILURE: ${currentBuild.fullDisplayName}", 
-           body: "SonarCube failed :-${currentBuild.fullDisplayName}")
-		throw e
-		}
-		echo 'Completed SonarCube Scanning'
-      
-    }
-   stage('Build') {
+	stage('Build') {
       // Run the maven build
       echo 'Building Application...'
       try{
@@ -85,12 +69,41 @@ node {
 	  catch(Exception e){
 		mail(from: "gopi.muruganantham@htcindia.com", 
            to: "gopi.muruganantham@htcindia.com", 
+           cc: "sayooj.panakkal@htcindia.com",
            subject: "FAILURE: ${currentBuild.fullDisplayName}", 
            body: "Project Build failed :-${currentBuild.fullDisplayName}")
 		throw e
 		}
 	  echo 'Building Completed'
    }
+	stage('Deploy for Testing') {
+       // Deploy the application 
+     echo 'Deploying Application...'
+      bat (/copy ${workspace}\\${JOB_NAME}\\target\\${BuildProject}.war ${testServer}\\webapps\\*/)
+	  echo 'Application Deployed'
+   }
+   
+   
+   stage("Liquibase"){
+	echo 'Initiated Liquibase Scanning...'
+		try{
+		if (isUnix()) {
+          sh "'${mvnHome}/bin/mvn' liquibase:update"
+        } else {
+          bat (/${mvnHome}\\bin\\mvn liquibase:update/)
+		  }
+		}
+		catch(Exception e){
+		mail(from: "gopi.muruganantham@htcindia.com", 
+           to: "gopi.muruganantham@htcindia.com", 
+           cc: "sayooj.panakkal@htcindia.com",
+           subject: "FAILURE: ${currentBuild.fullDisplayName}", 
+           body: "Liquibase failed :-${currentBuild.fullDisplayName}")
+		throw e
+		}
+		echo 'Completed SonarCube Scanning'
+   }
+   
    stage('UnitTesting') {
       // Run the maven Unit Testing
       echo 'Initiated Unit Testing...'
@@ -98,13 +111,14 @@ node {
 	 if (isUnix()) {
          sh "'${mvnHome}/bin/mvn' test"
       } else {
-        bat(/${mvnHome}\bin\mvn clean test/)
+        bat(/${mvnHome}\bin\mvn test/)
          
       }
 	  }
 	  catch(Exception e){
 		mail(from: "gopi.muruganantham@htcindia.com", 
            to: "gopi.muruganantham@htcindia.com", 
+           cc: "sayooj.panakkal@htcindia.com",
            subject: "FAILURE: ${currentBuild.fullDisplayName}", 
            body: "UnitTesting failed :-${currentBuild.fullDisplayName}")
 		throw e
@@ -118,12 +132,7 @@ node {
       archive 'target/*.war'
 	  echo 'Test Result recorded'
    }
-   stage('Deploy for Testing') {
-       // Deploy the application 
-     echo 'Deploying Application...'
-      bat (/copy ${workspace}\\${BuildProject}\\target\\${BuildProject}.war ${TestServer}\\webapps\\*/)
-	  echo 'Application Deployed'
-   }
+   
    stage('Automation Testing') {
        // Initiate Automation Testing
 	   echo 'Preparing Code for Automation Testing...'
@@ -138,6 +147,7 @@ node {
 	   catch(Exception e){
 		mail(from: "gopi.muruganantham@htcindia.com", 
            to: "gopi.muruganantham@htcindia.com", 
+           cc: "sayooj.panakkal@htcindia.com",
            subject: "FAILURE: ${currentBuild.fullDisplayName}", 
            body: "Unable to locate Automation Script :-${currentBuild.fullDisplayName}")
 		throw e
@@ -158,6 +168,7 @@ node {
 		catch(Exception e){
 		mail(from: "gopi.muruganantham@htcindia.com", 
            to: "gopi.muruganantham@htcindia.com", 
+           cc: "sayooj.panakkal@htcindia.com",
            subject: "FAILURE: ${currentBuild.fullDisplayName}", 
            body: "Automation Test failed :-${currentBuild.fullDisplayName}")
 		throw e
@@ -170,16 +181,34 @@ node {
 	    }
 
    }
-   stage('Production Deploy') {
-       // Deploy the application 
-     echo 'Deploying Application...'
-      bat (/copy ${workspace}\\${BuildProject}\\target\\${BuildProject}.war ${productionServer}\\webapps\\*/)
-	  echo 'Application Deployed'
-   }
+   
+   stage("SonarCube"){
+      
+	    echo 'Initiated SonarCube Scanning...'
+		try{
+		if (isUnix()) {
+          sh "'${mvnHome}/bin/mvn' clean sonar:sonar"
+        } else {
+          bat (/${mvnHome}\\bin\\mvn clean sonar:sonar/)
+		  }
+		}
+		catch(Exception e){
+		mail(from: "gopi.muruganantham@htcindia.com", 
+           to: "gopi.muruganantham@htcindia.com", 
+           cc: "sayooj.panakkal@htcindia.com",
+           subject: "FAILURE: ${currentBuild.fullDisplayName}", 
+           body: "SonarCube failed :-${currentBuild.fullDisplayName}")
+		throw e
+		}
+		echo 'Completed SonarCube Scanning'
+      
+    }
+     
    stage("Result"){
       if(currentBuild.result!="FAILED"){
       emailext from: "gopi.muruganantham@htcindia.com", 
 		 to: "gopi.muruganantham@htcindia.com",
+		 cc: "sayooj.panakkal@htcindia.com",
 		 recipientProviders: [[$class: "DevelopersRecipientProvider"]], 
 		 subject: "Build success ${currentBuild.fullDisplayName}", 
 		body: "Build Result ${currentBuild.fullDisplayName}: ${currentBuild.result}"
@@ -187,6 +216,7 @@ node {
       else{
       emailext from: "gopi.muruganantham@htcindia.com", 
 		 to: "gopi.muruganantham@htcindia.com",
+		 cc: "sayooj.panakkal@htcindia.com",
 		 recipientProviders: [[$class: "DevelopersRecipientProvider"]], 
 		 subject: "Build Failed ${currentBuild.fullDisplayName}", 
 		body: "Build Result ${currentBuild.fullDisplayName}: ${currentBuild.result}"
