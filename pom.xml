@@ -74,12 +74,12 @@
 
 
 		<!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
-<dependency>
-    <groupId>org.liquibase</groupId>
-    <artifactId>liquibase-core</artifactId>
-    <version>3.5.3</version>
-</dependency>
-		
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>3.5.3</version>
+		</dependency>
+
 
 		<!-- MySQL database driver -->
 		<dependency>
@@ -107,7 +107,20 @@
 		<finalName>MavenSpringMVC</finalName>
 
 		<plugins>
+			<!-- Tomcat plugin -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+					<server>TomcatServer</server>
+					<username>gopi</username>
+					<password>123Welcome</password>
+					<warFile>target/MavenSpringMVC.war</warFile>
 
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -117,23 +130,36 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+
+			<!-- Tomcat plugin -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:7070/manager/text</url>
+					<server>TomcatServer</server>
+					<username>gopi</username>
+					<password>123Welcome</password>
+				</configuration>
+			</plugin>
 			
 			<plugin>
-        <groupId>org.liquibase</groupId>
-        <artifactId>liquibase-maven-plugin</artifactId>
-	<version>3.0.5</version>
-	<configuration>
-	    <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
-	</configuration>
-	<executions>
-	    <execution>
-	    
-	        <goals>
-		    <goal>update</goal>
-		</goals>
-	    </execution>
-	</executions>
-    </plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>3.0.5</version>
+				<configuration>
+					<propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
+				</configuration>
+				<executions>
+					<execution>
+
+						<goals>
+							<goal>update</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<!-- <plugin> <artifactId>maven-compiler-plugin</artifactId> <version>3.1</version> 
 				<configuration> <fork>true</fork> <executable>C:\Program Files\Java\jdk1.8.0_25\bin\javac.exe</executable> 
 				</configuration> </plugin> -->
