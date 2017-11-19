@@ -11,7 +11,6 @@ public class UserServiceImpl implements UserService {
 
   @Autowired
   public UserDAO userDAO;
-
   public void register(User user) {
     userDAO.register(user);
   }
@@ -21,8 +20,7 @@ public class UserServiceImpl implements UserService {
   }
   
   /* Method to list valid users -- for  Selenium testing*/
-	public HashMap<String, String> existingUsers() {
-				
+	public HashMap<String, String> existingUsers() {		
 		return userDAO.existingUsers();
 	}
 

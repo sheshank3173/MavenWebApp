@@ -77,7 +77,7 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
-			<version>3.5.3</version>
+			<version>3.4.2</version>
 		</dependency>
 
 
@@ -92,66 +92,62 @@
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>9.4.1208-jdbc42-atlassian-hosted</version>
+			<version>9.1-901.jdbc4</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.2</version>
 		</dependency>
-
-
-
 	</dependencies>
 	<build>
 		<finalName>MavenSpringMVC</finalName>
-
 		<plugins>
-			<!-- Tomcat plugin -->
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<url>http://localhost:8080/manager/text</url>
-					<server>TomcatServer</server>
-					<username>gopi</username>
-					<password>123Welcome</password>
-					<warFile>target/MavenSpringMVC.war</warFile>
-
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-
-			
-			
-			<plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>3.0.5</version>
-				<configuration>
-					<propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
-				</configuration>
-				<executions>
-					<execution>
-
-						<goals>
-							<goal>update</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- <plugin> <artifactId>maven-compiler-plugin</artifactId> <version>3.1</version> 
-				<configuration> <fork>true</fork> <executable>C:\Program Files\Java\jdk1.8.0_25\bin\javac.exe</executable> 
-				</configuration> </plugin> -->
+		<!-- Tomcat plugin -->
+		<plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>2.2</version>
+		  <configuration>
+			<url>http://localhost:8080/manager/text</url>
+			<server>TomcatServer</server>
+			<username>tomcat</username>
+			<password>tomcat</password>
+		  </configuration>
+        </plugin>
+		<!--<plugin>
+		  <groupId>org.liquibase</groupId>
+		  <artifactId>liquibase-maven-plugin</artifactId>
+		  <version>3.0.5</version>
+		  <configuration>
+				<propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
+		  </configuration>
+		  <executions>
+			<execution>
+		        <goals>
+					<goal>update</goal>
+				</goals>
+			</execution>
+		  </executions>
+	    </plugin>-->
+	    <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>3.4.2</version>
+        <configuration>
+          <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
+        </configuration>
+        <!--  I personally prefer run  it manually
+        <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>update</goal>
+            </goals>
+          </execution>
+        </executions>
+        -->
+      </plugin>
 		</plugins>
 	</build>
 </project>

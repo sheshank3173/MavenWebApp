@@ -12,11 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.htc.model.User;
 import com.htc.service.UserService;
+import com.htc.service.UserServiceImpl;
 
 @Controller
 public class RegistrationController {
 	@Autowired
-	public UserService userService;
+	public UserService userService = new UserServiceImpl();
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response) {

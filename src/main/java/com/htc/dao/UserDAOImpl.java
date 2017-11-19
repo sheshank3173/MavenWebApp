@@ -30,7 +30,6 @@ public class UserDAOImpl implements UserDAO {
 		String sql = "select * from users where username='" + login.getUsername() + "' and password='"
 				+ login.getPassword() + "'";
 		List<User> users = jdbcTemplate.query(sql, new UserMapper());
-		
 		return users.size() > 0 ? users.get(0) : null;
 	}
 
@@ -42,7 +41,6 @@ public class UserDAOImpl implements UserDAO {
 		for (User user : usersList) {
 			users.put(user.getUsername(), user.getPassword());
 		}
-		
 		return users;
 	}
 

@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.htc.model.Login;
 import com.htc.model.User;
+
 public interface UserDAO {
   public void register(User user);
   public User validateUser(Login login);
